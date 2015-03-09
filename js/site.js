@@ -182,5 +182,5 @@ $(document).ready(function(){
     }
   });
   // automatically reload the page once per day
-  setTimeout('refreshPage()', 86400);
+  setTimeout('refreshPage()', 864000000);
 });
