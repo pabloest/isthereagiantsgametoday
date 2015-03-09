@@ -12,6 +12,10 @@ function isDateLaterThan(a, b) {
   return a > b;
 }
 
+function refreshPage() {
+  location.reload();
+}
+
 /* from https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date */
 function ISODateString(d){
   function pad(n){return n<10 ? '0'+n : n}
@@ -177,4 +181,6 @@ $(document).ready(function(){
       $("#game").show();
     }
   });
+  // automatically reload the page once per day
+  setTimeout('refreshPage()', 86400);
 });
