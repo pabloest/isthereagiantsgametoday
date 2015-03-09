@@ -1,3 +1,13 @@
+var url = 'data/giants2015schedule.json';
+var today = new Date();
+var nextGame = null;
+var todaysGame = null;
+var linescore_url_dyn = '';
+var linescore_url_root = 'http://gd2.mlb.com/components/game/mlb/year_2015/';
+var y_url = '';
+var opponent, gameFinished = false, result = 'won';
+var giantsRuns, opponentRuns;
+
 function isDateLaterThan(a, b) {
   return a > b;
 }
@@ -72,14 +82,6 @@ function getLinescoreLink(gridLink) {
 }
 
 $(document).ready(function(){
-  var url = 'data/giants2015schedule.json';
-  var today = new Date();
-  var nextGame = null;
-  var todaysGame = null;
-  var linescore_url_dyn = '';
-  var linescore_url_root = 'http://gd2.mlb.com/components/game/mlb/year_2015/';
-  var y_url = '';
-
   // Format date as MM/DD/YY
   var curr_date = today.getDate();
   var curr_month = today.getMonth() + 1;
