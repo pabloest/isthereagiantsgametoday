@@ -49,6 +49,28 @@ function make_y_url(_url) {
   return _y_url;
 }
 
+function getLinescoreLink(gridLink) {
+  var giantsLinescoreURL = gridLink.split('grid.json')[0];
+    $.getJSON(gridLink, function findGiantsScoreLinkFromGames(json) {
+  })
+  .done(function getLinscoreFromLink(json) {
+    $.each(json.data.games.game, function searchForGiantsGame(i, game) {
+      if (game.away_team_name === 'Giants' || game.home_team_name === 'Giants') {
+        giantsLinescoreURL = giantsLinescoreURL + 'gid_' + game.id.replace(/[\/-]/g,"_") + '/linescore.json';
+        return false;
+      }
+    });
+
+    $.getJSON(giantsLinescoreURL, function(json){
+    })
+    .done(function (json) {
+      if (json.data.game.status !== 'Preview') {
+        populatescore(json);
+      }
+    });
+  });
+}
+
 $(document).ready(function(){
   var url = 'data/giants2015schedule.json';
   var today = new Date();
@@ -78,28 +100,6 @@ $(document).ready(function(){
         return false;
       }
     });
-
-    function getLinescoreLink(gridLink) {
-      var giantsLinescoreURL = gridLink.split('grid.json')[0];
-      $.getJSON(gridLink, function findGiantsScoreLinkFromGames(json) {
-      })
-      .done(function getLinscoreFromLink(json) {
-        $.each(json.data.games.game, function searchForGiantsGame(i, game) {
-          if (game.away_team_name === 'Giants' || game.home_team_name === 'Giants') {
-            giantsLinescoreURL = giantsLinescoreURL + 'gid_' + game.id.replace(/[\/-]/g,"_") + '/linescore.json';
-            return false;
-          }
-        });
-
-        $.getJSON(giantsLinescoreURL, function(json){
-        })
-        .done(function (json) {
-          if (json.data.game.status !== 'Preview') {
-            populatescore(json);
-          }
-        });
-      });
-    }
 
     if (todaysGame) {
       var gridLink;
