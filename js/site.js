@@ -123,33 +123,7 @@ $(document).ready(function(){
         }
       }
       getLinescoreLink(gridLink);
-    }
-  });
 
-  // Create datepicker
-  // $("#datecheck").html('Checking <input id="datepicker" type="text">');
-  // $("#datepicker").datepicker();
-  // $(".datepicker").datepicker.("setDate", dateString);
-  // Check for game today      
-
-  $.getJSON(url, function(json){
-    var nextGameDate;
-    $.each(json.games,function(i,game){
-      nextGameDate = new Date(game.date);
-      // Uncomment for debugging 
-      // console.log("Today: " + today + " - Looking at game: " + nextGameDate);
-
-      if (!nextGame && isDateLaterThan(nextGameDate, today)){
-        nextGame = game;
-        return false; // break the loop
-      }
-      if(today.getYear() == nextGameDate.getYear() && today.getMonth() == nextGameDate.getMonth() && today.getDate() == nextGameDate.getDate()) {
-        todaysGame = game;
-        return false; // break the loop
-      }
-    });
-
-    if (todaysGame) {
       $(".fill-in").text("YES");
       $("#game .summary").text("Giants play the " + todaysGame.opponent);
       $("#game .location").text(todaysGame.location);
