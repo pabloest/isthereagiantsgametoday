@@ -32,22 +32,34 @@ function populatescore(_json) {
           $("#game .homescore").append("<td class='score" + (i+1) + "'>" + inning.home_inning_runs + "</td>");
       }
   });
-  if (_json.data.game.status === 'Final') {
-    $("#game .boxheader").append("<td class='inning'>F</td>");
-  }
-  else {
-    $("#game .boxheader").append("<td class='inning'>R</td>");
-  }
   $("#game .awayscore").append("<td class='awayruns'>" + _json.data.game.away_team_runs + "</td>");
   $("#game .homescore").append("<td class='homeruns'>" + _json.data.game.home_team_runs + "</td>");
 
   if (_json.data.game.home_team_name === 'Giants') {
-      $("#game .homeruns").addClass("giants");
-      $("#game .awayruns").addClass("opponent");
+    giantsRuns = _json.data.game.home_team_runs;
+    opponentRuns = _json.data.game.away_team_runs;
+    $("#game .homeruns").addClass("giants");
+    $("#game .awayruns").addClass("opponent");
   }
-   else {
-      $("#game .homeruns").addClass("opponent");
-      $("#game .awayruns").addClass("giants");
+  else {
+    giantsRuns = _json.data.game.away_team_runs;
+    opponentRuns = _json.data.game.home_team_runs;
+    $("#game .homeruns").addClass("opponent");
+    $("#game .awayruns").addClass("giants");
+  }
+
+  if (parseInt(giantsRuns, 10) < parseInt(opponentRuns, 10)) result = 'lost';
+
+  if (_json.data.game.status === 'Final') {
+    gameFinished = true;
+    $("#game .boxheader").append("<td class='inning'>F</td>");
+    $("#game .summary").text("Giants played the " + opponent + " at ");
+    $("#game .location").text(todaysGame.location);
+    $("#game .tstart").remove();
+    $("#game .location").append(' and ' + result);
+  }
+  else {
+    $("#game .boxheader").append("<td class='inning'>R</td>");
   }
   $('.boxscore').show();
 }
@@ -95,10 +107,12 @@ $(document).ready(function(){
       nextGameDate = new Date(game.date);
       if (!nextGame && isDateLaterThan(nextGameDate, today)) {
         nextGame = game;
+        opponent = nextGame.opponent;
         return false;
       }
       if (today.getYear() == nextGameDate.getYear() && today.getMonth() == nextGameDate.getMonth() && today.getDate() == nextGameDate.getDate()) {
         todaysGame = game;
+        opponent = todaysGame.opponent;
         return false;
       }
     });
@@ -127,7 +141,7 @@ $(document).ready(function(){
       getLinescoreLink(gridLink);
 
       $(".fill-in").text("YES");
-      $("#game .summary").text("Giants play the " + todaysGame.opponent);
+      $("#game .summary").text("Giants play the " + opponent + " at ");
       $("#game .location").text(todaysGame.location);
       $("#game .tstart").text(todaysGame.time);
 
@@ -146,7 +160,7 @@ $(document).ready(function(){
     else {
       $(".fill-in").text("NO");
       $("#game .date").text(nextGame.date);
-      $("#game .summary").text("Giants will play the " + nextGame.opponent);
+      $("#game .summary").text("Giants will play the " + opponent + " at ");
       $("#game .location").text(nextGame.location);
 
       // Formate next game date as day of the week
