@@ -6,8 +6,6 @@ body { font-family: Helvetica, Arial, sans-serif;
 #footer { margin: 30px; font-size: 20px; }
 
 a:link, a:visited { text-decoration: none; color: #D2612F; }
-#counter:hover { border: 0; text-decoration: underline; }
-
 .boxscore {font-size: 16px; width: 500px; margin: 30px auto 10px auto; display: none;}
 .boxscore table {
   border: 1px solid #666;
