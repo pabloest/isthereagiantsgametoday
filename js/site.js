@@ -53,6 +53,7 @@ function populatescore(_json) {
   }
 
   if (parseInt(giantsRuns, 10) < parseInt(opponentRuns, 10)) result = 'lost';
+  else if (parseInt(giantsRuns, 10) === parseInt(opponentRuns, 10)) result = 'tied'; //this can only happen in spring training
 
   if (_json.data.game.status === 'Final') {
     gameFinished = true;
