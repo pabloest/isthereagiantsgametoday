@@ -61,7 +61,7 @@ function populatescore(_json) {
     $("#game .summary").text("Giants played the " + opponent + " at ");
     $("#game .location").text(todaysGame.location);
     $("#game .tstart").remove();
-    $("#game .location").append(' and ' + result);
+    $("#game .location").append(' and ' + result + '.');
   }
   else {
     $("#game .boxheader").append("<td class='inning'>R</td>");
