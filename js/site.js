@@ -158,7 +158,6 @@ $(document).ready(function(){
        else {
           $("body").addClass("away");
           $("#yesno .homeaway").text("Away");
-          $("#yesno").css("border-color", "#000");
        }
       $("#game").show();
     }
