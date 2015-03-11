@@ -58,7 +58,7 @@ function populatescore(_json) {
   if (_json.data.game.status === 'Final') {
     gameFinished = true;
     $("#game .boxheader").append("<td class='inning'>F</td>");
-    $("#game .summary").text("Giants played the " + opponent + " at ");
+    $("#game .summary").text("The Giants played the " + opponent + " at ");
     $("#game .location").text(todaysGame.location);
     $("#game .tstart").remove();
     $("#game .location").append(' and ' + result + '.');
@@ -146,7 +146,7 @@ $(document).ready(function(){
       getLinescoreLink(gridLink);
 
       $(".fill-in").text("YES");
-      $("#game .summary").text("Giants play the " + opponent + " at ");
+      $("#game .summary").text("The Giants play the " + opponent + " at ");
       $("#game .location").text(todaysGame.location);
       $("#game .tstart").text(todaysGame.time);
 
@@ -165,7 +165,7 @@ $(document).ready(function(){
     else {
       $(".fill-in").text("NO");
       $("#game .date").text(nextGame.date);
-      $("#game .summary").text("Giants will play the " + opponent + " at ");
+      $("#game .summary").text("The Giants will play the " + opponent + " at ");
       $("#game .location").text(nextGame.location);
 
       // Formate next game date as day of the week
