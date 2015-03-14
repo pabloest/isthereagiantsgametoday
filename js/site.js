@@ -147,7 +147,7 @@ $(document).ready(function(){
 
       $(".fill-in").text("YES");
       $("#game .summary").text("The Giants play the " + opponent + " at ");
-      $("#game .location").text(todaysGame.location);
+      $("#game .location").text(" at " + todaysGame.location);
       $("#game .tstart").text(todaysGame.time);
 
       $("#game abbr").attr('title', ISODateString(nextGameDate));
@@ -165,7 +165,7 @@ $(document).ready(function(){
       $(".fill-in").text("NO");
       $("#game .date").text(nextGame.date);
       $("#game .summary").text("The Giants will play the " + opponent + " at ");
-      $("#game .location").text(nextGame.location);
+      $("#game .location").text(" at " + nextGame.location);
 
       // Formate next game date as day of the week
       var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
