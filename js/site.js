@@ -181,6 +181,6 @@ $(document).ready(function(){
       $("#game").show();
     }
   });
-  // automatically reload the page once per day
-  setTimeout('refreshPage()', 864000000);
+  // automatically reload the page once every 8 hours
+  setTimeout('refreshPage()', 1000*60*60*8);
 });
