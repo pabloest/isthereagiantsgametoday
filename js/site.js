@@ -162,22 +162,14 @@ $(document).ready(function(){
       $("#game").show();
     }
     else {
-      $(".fill-in").text("NO");
-      $("#game .date").text(nextGame.date);
-      $("#game .summary").text("The Giants will play the " + opponent + " at ");
-      $("#game .location").text(" at " + nextGame.location + ".");
-
       // Formate next game date as day of the week
       var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
       var nextGameDay = weekday[nextGameDate.getDay()];
-      // Format next game date as day of the week
-
-      $("#game .day").text("on " + nextGameDay);
+      $(".fill-in").text("NO");
+      $("#game .summary").text("The Giants will play the " + opponent);
+      $("#game .day").text(" on " + nextGameDay);
       $("#game .tstart").text(nextGame.time);
-      // if (nextGame.location == "AT&T Park") {
-      //  $("#nextgame .location").addClass("homegame");
-      //   $("body").addClass("homegame-bg");
-      // }
+      $("#game .location").text(" at " + nextGame.location + ".");
       $("#game").show();
     }
   });
