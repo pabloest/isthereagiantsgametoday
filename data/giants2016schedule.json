@@ -1103,24 +1103,42 @@
             "location": "AT&T Park - San Francisco", 
             "opponent": "Rockies", 
             "time": "7:15pm"
-        }, 
+        },
         {
             "date": "09/30/2016", 
             "location": "AT&T Park - San Francisco", 
             "opponent": "Dodgers", 
             "time": "7:15pm"
-        }, 
+        },
         {
             "date": "10/01/2016", 
             "location": "AT&T Park - San Francisco", 
             "opponent": "Dodgers", 
             "time": "1:05pm"
-        }, 
+        },
         {
             "date": "10/02/2016", 
             "location": "AT&T Park - San Francisco", 
             "opponent": "Dodgers", 
             "time": "12:05pm"
+        },
+        {
+            "date": "10/07/2016", 
+            "location": "Wrigley Field - Chicago", 
+            "opponent": "Cubs", 
+            "time": "6:00pm"
+        },
+        {
+            "date": "10/08/2016", 
+            "location": "Wrigley Field - Chicago", 
+            "opponent": "Cubs", 
+            "time": "6:00pm"
+        },
+        {
+            "date": "10/10/2016", 
+            "location": "AT&T Park - San Francisco", 
+            "opponent": "Cubs", 
+            "time": "7:30pm"
         }
     ], 
     "link": "http://www.isthereagiantsgametoday.com/", 
