@@ -1,9 +1,9 @@
-var url = 'data/giants2016schedule.json';
+var url = 'data/giants2017schedule.json';
 var today = new Date();
 var nextGame = null;
 var todaysGame = null;
 var linescore_url_dyn = '';
-var linescore_url_root = 'http://gd2.mlb.com/components/game/mlb/year_2016/';
+var linescore_url_root = 'http://gd2.mlb.com/components/game/mlb/year_2017/';
 var y_url = '';
 var opponent, gameFinished = false, result = 'won';
 var giantsRuns, opponentRuns;
