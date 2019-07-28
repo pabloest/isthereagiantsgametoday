@@ -1,9 +1,9 @@
-var url = 'data/giants2018schedule.json';
+var url = 'data/giants2019schedule.json';
 var today = new Date();
 var nextGame = null;
 var todaysGame = null;
 var linescore_url_dyn = '';
-var linescore_url_root = 'http://gd2.mlb.com/components/game/mlb/year_2018/';
+var linescore_url_root = 'http://gd2.mlb.com/components/game/mlb/year_2019/';
 var y_url = '';
 var opponent, gameFinished = false, result = 'won';
 var giantsRuns, opponentRuns;
@@ -151,7 +151,7 @@ $(document).ready(function(){
       $("#game .tstart").text(todaysGame.time);
 
       $("#game abbr").attr('title', ISODateString(nextGameDate));
-      if (todaysGame.location == "AT&T Park") {
+      if (todaysGame.location == "Oracle Park") {
           $("body").addClass("home");
           $("#yesno .homeaway").text("At home");
        }
