@@ -25,29 +25,33 @@ function ISODateString(d){
 }
 
 function populatescore(_json) {
-  $("#game .awayteam").append(_json.data.game.away_team_name);
-  $("#game .hometeam").append(_json.data.game.home_team_name);
-  $.each(_json.data.game.linescore, function(i, inning) {
-      $("#game .awayscore .score" + (i + 1)).append(inning.away_inning_runs);
-      $("#game .homescore .score" + (i + 1)).append(inning.home_inning_runs);
+  $("#game .awayteam").append(_json.away_team_name);
+  $("#game .hometeam").append(_json.home_team_name);
+  $.each(_json.linescore.inning, function(i, inning) {
+      $("#game .awayscore .score" + (i + 1)).append(inning.away);
+      $("#game .homescore .score" + (i + 1)).append(inning.home);
       if (i>8) {
           $("#game .boxheader").append("<td class='inning'>" + (i+1) + "</td>");
-          $("#game .awayscore").append("<td class='score" + (i+1) + "'>" + inning.away_inning_runs + "</td>");
-          $("#game .homescore").append("<td class='score" + (i+1) + "'>" + inning.home_inning_runs + "</td>");
+          $("#game .awayscore").append("<td class='score" + (i+1) + "'>" + inning.away + "</td>");
+          $("#game .homescore").append("<td class='score" + (i+1) + "'>" + inning.home + "</td>");
       }
   });
-  $("#game .awayscore").append("<td class='awayruns'>" + _json.data.game.away_team_runs + "</td>");
-  $("#game .homescore").append("<td class='homeruns'>" + _json.data.game.home_team_runs + "</td>");
+  if (_json.linescore.r.away) {
+    $("#game .awayscore").append("<td class='awayruns'>" + _json.linescore.r.away + "</td>");
+  } else $("#game .awayscore").append("<td class='awayruns'>0</td>");
+  if (_json.linescore.r.home) {
+    $("#game .homescore").append("<td class='homeruns'>" + _json.linescore.r.home + "</td>");
+  } else $("#game .homescore").append("<td class='homeruns'>0</td>");
 
-  if (_json.data.game.home_team_name === 'Giants') {
-    giantsRuns = _json.data.game.home_team_runs;
-    opponentRuns = _json.data.game.away_team_runs;
+  if (_json.home_team_name === 'Giants') {
+    giantsRuns = _json.home_team_runs;
+    opponentRuns = _json.away_team_runs;
     $("#game .homeruns").addClass("giants");
     $("#game .awayruns").addClass("opponent");
   }
   else {
-    giantsRuns = _json.data.game.away_team_runs;
-    opponentRuns = _json.data.game.home_team_runs;
+    giantsRuns = _json.away_team_runs;
+    opponentRuns = _json.home_team_runs;
     $("#game .homeruns").addClass("opponent");
     $("#game .awayruns").addClass("giants");
   }
@@ -55,7 +59,7 @@ function populatescore(_json) {
   if (parseInt(giantsRuns, 10) < parseInt(opponentRuns, 10)) result = 'lost';
   else if (parseInt(giantsRuns, 10) === parseInt(opponentRuns, 10)) result = 'tied'; //this can only happen in spring training
 
-  if (_json.data.game.status === 'Final') {
+  if (_json.status === 'Final') {
     gameFinished = true;
     $("#game .boxheader").append("<td class='inning'>F</td>");
     $("#game .summary").text("The Giants played the " + opponent + " at ");
@@ -128,22 +132,37 @@ $(document).ready(function(){
         gridLink = linescore_url_root + 'month_0';
 
         if (curr_date < 10) {
-          gridLink = gridLink + curr_month + "/day_0" + curr_date + "/" + 'grid.json';
+          gridLink = gridLink + curr_month + "/day_0" + curr_date + "/" + 'master_scoreboard.json';
         }
         else {
-          gridLink = gridLink + curr_month + "/day_" + curr_date + "/" + 'grid.json';
+          gridLink = gridLink + curr_month + "/day_" + curr_date + "/" + 'master_scoreboard.json';
         }
       }
       else {
         if (curr_date < 10)
         {
-          gridLink = gridLink + curr_month + "/day_0" + curr_date + "/" + 'grid.json';
+          gridLink = gridLink + curr_month + "/day_0" + curr_date + "/" + 'master_scoreboard.json';
         }
         else {
-          gridLink = gridLink + curr_month + "/day_" + curr_date + "/" + 'grid.json';
+          gridLink = gridLink + curr_month + "/day_" + curr_date + "/" + 'master_scoreboard.json';
         }
       }
-      getLinescoreLink(gridLink);
+      
+      $.getJSON(gridLink, function(){
+      })
+      .done(function (data) {
+        $.each(data.data.games.game, function (i, game) {
+          if (game.away_code === "sfn") {
+            populatescore(game);
+          }
+          if (game.home_code === "sfn") {
+            populatescore(game);
+          }
+        });
+        // if (data.game.status !== 'Preview') {
+        //   populatescore(game);
+        // }
+      });
 
       $(".fill-in").text("YES");
       $("#game .summary").text("The Giants play the " + opponent + " at ");
