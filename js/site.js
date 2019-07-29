@@ -58,8 +58,7 @@ function populatescore(_json) {
 
   if (parseInt(giantsRuns, 10) < parseInt(opponentRuns, 10)) result = 'lost';
   else if (parseInt(giantsRuns, 10) === parseInt(opponentRuns, 10)) result = 'tied'; //this can only happen in spring training
-
-  if (_json.status === 'Final') {
+  if (_json.status.status === 'Final') {
     gameFinished = true;
     $("#game .boxheader").append("<td class='inning'>F</td>");
     $("#game .summary").text("The Giants played the " + opponent + " at ");
@@ -147,7 +146,7 @@ $(document).ready(function(){
           gridLink = gridLink + curr_month + "/day_" + curr_date + "/" + 'master_scoreboard.json';
         }
       }
-      
+
       $.getJSON(gridLink, function(){
       })
       .done(function (data) {
