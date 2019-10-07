@@ -44,14 +44,14 @@ function populatescore(_json) {
   } else $("#game .homescore").append("<td class='homeruns'>0</td>");
 
   if (_json.home_team_name === 'Giants') {
-    giantsRuns = _json.home_team_runs;
-    opponentRuns = _json.away_team_runs;
+    giantsRuns = _json.linescore.r.home;
+    opponentRuns = _json.linescore.r.away;
     $("#game .homeruns").addClass("giants");
     $("#game .awayruns").addClass("opponent");
   }
   else {
-    giantsRuns = _json.away_team_runs;
-    opponentRuns = _json.home_team_runs;
+    giantsRuns = _json.linescore.r.away;
+    opponentRuns = _json.linescore.r.home;
     $("#game .homeruns").addClass("opponent");
     $("#game .awayruns").addClass("giants");
   }
@@ -62,7 +62,7 @@ function populatescore(_json) {
     gameFinished = true;
     $("#game .boxheader").append("<td class='inning'>F</td>");
     $("#game .summary").text("The Giants played the " + opponent + " at ");
-    $("#game .location").text(todaysGame.location);
+    $("#game .location").text(_json.venue);
     $("#game .tstart").remove();
     $("#game .location").append(' and ' + result + '.');
   }
