@@ -1,5 +1,7 @@
 # Is there a Giants game today?
 
+![SF Giants logo](http://www.pabloestrada.us/sf-giants.png?rm)
+
 ## Getting the code
 
 To get a local copy of the current code, clone it using git:
@@ -42,3 +44,4 @@ You can add your name to it! :)
 
 * Offline support
 * Fun daily messages and graphics
+
