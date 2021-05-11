@@ -3,7 +3,7 @@ var today = new Date();
 var nextGame = null;
 var todaysGame = null;
 var linescore_url_dyn = "";
-var linescore_url_root = "http://gd2.mlb.com/components/game/mlb/year_2021/";
+var linescore_url_root = "https://gd2.mlb.com/components/game/mlb/year_2021/";
 var y_url = "";
 var opponent,
   gameFinished = false,
